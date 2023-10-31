@@ -4,6 +4,68 @@ let works; // Stocke les données des travaux
 let categories; // Stocke les travaux categories//
 let filterWorks;  // Stocke les travaux filtrés
 
+// Déclaration de la fonction displayCategory
+const takeCategory = (categories) => {
+  // Sélectionne l'élément HTML avec la classe 'filters'
+  const sectionFilters = document.querySelector('.filters');
+  // Vide son contenu
+  sectionFilters.innerHTML = '';
+
+  // Fonction pour créer un bouton filtre
+  const createButton = (text, dataId) => {
+    const button = document.createElement('button'); // Crée le bouton
+    button.textContent = text; // Définit le texte du bouton
+    button.setAttribute('data-id', dataId); // Définit l'attribut 'data-id'
+    button.classList.add('btnFilter'); // Ajoute la classe 'btnFilter'
+    sectionFilters.appendChild(button); // Ajoute le bouton à la section 'filters'
+    return button; // Retourne le bouton créé
+  };
+
+  // Crée un bouton "Tous" avec l'ID 0, ajout classe 'activation'
+  const buttonAll = createButton('Tous', 0);
+  buttonAll.classList.add('activation');
+
+  // Fonction pour filtrer les travaux en fonction de la catégorie sélectionnée
+  const filterWorks = (categoryId) => {
+    // Sélectionne tous les boutons de filtre
+    const btnFilters = document.querySelectorAll('.btnFilter');
+    // Supprime la classe 'ativation' de tous les boutons de filtre
+    btnFilters.forEach((btn) => btn.classList.remove('activation'));
+    // Filtrer les travaux en fonction de l'ID de catégorie
+    const filteredWorks = works.filter((el) => el.categoryId == categoryId);
+
+    // Si des travaux filtrés sont trouvés, les affiche, sinon affiche tous les travaux
+    if (filteredWorks.length !== 0) {
+      takeWorks(filteredWorks);
+    } else {
+      takeWorks(works);
+    }
+  };
+
+  // Ajoute un addEventListener au bouton "Tous" pour afficher tous les travaux
+  buttonAll.addEventListener('click', () => {
+    filterWorks(0);
+    buttonAll.classList.add('activation'); // Marque le bouton "Tous" comme activé
+  });
+
+  // Boucle sur les catégories, création des boutons pour chaque catégorie
+  categories.forEach((element) => {
+    const buttonCategory = createButton(element.name, element.id);
+    // Ajoute un addEventListener pour chaque bouton de catégorie
+    buttonCategory.addEventListener('click', () => {
+      filterWorks(element.id); // Filtre les travaux en fonction de l'ID de catégorie
+      buttonCategory.classList.add('activation'); // Marque le bouton de catégorie comme activé
+    });
+  });
+};
+
+// Récupération des catégories depuis l'API avec fetch
+fetch('http://localhost:5678/api/categories')
+  .then((response) => response.json()) // Transforme la réponse en JSON
+  .then(takeCategory) // Appelle la fonction takeCategory avec les données des catégories
+  .catch((error) => {
+    alert(`Erreur: ${error}`);
+  });
 
 //-- Récupération des projets depuis l'API -- //
 fetch('http://localhost:5678/api/works')

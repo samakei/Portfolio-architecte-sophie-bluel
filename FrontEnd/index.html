@@ -12,16 +12,72 @@
     />
     <meta name="description" content="" />
     <link rel="stylesheet" href="./assets/style.css" />
-	<script src="./javascrip/index.js"></script>
+	<script src="./javascrip/index.js" defer></script>
   </head>
   <body>
+<!--<header>--> 
+    			<!-- Div pour la modale -->
+	<div class="modal-container">
+
+		<div class="overlay modal-trigger"></div>
+ 
+		<div class="modal">
+			<button-type class="back-modal">
+				<i class="fa-solid fa-arrow-left"></i>
+			</button>
+			<button-type class="close-modal modal-trigger">
+				<i class="fa-solid fa-xmark"></i>
+			</button>
+			<h1 class="modalTitle">Galerie photo</h1>
+			<div class="thumbnailsModal"></div>
+			<div class="formModalTwo hidden">
+				<form id="testForm" class="form" action="#" method="post">
+					<div class="addPhotoBlock">
+						<div class="addPhotoBlockBis">
+							<i class="fa-regular fa-image"></i>
+							<div class="addPhotoBtn">
+								<label class="addPhotoLabel" for="File">+ Ajouter photo</label>
+								<input class="hiddenInput" type="file" name="File" id="File" accept=".jpg, .png" onchange="showImageMini(this)">
+							</div>
+							<p>jpg, png : 4mo max</p>
+						</div>
+					</div>
+					<label class="titleLabel" for="title">Titre</label>
+					<input type="text" name="title" id="title">
+					<label class="categoriesLabel" for="categories">Catégorie</label>
+					<select name="categories" id="categories"></select>
+					<p class="hidden errorMessageCategory">Veuillez remplir tous les champs</p>
+					<div class="ButtonValidation">
+						<button type="submit" id="btnValider">Valider</button>
+					</div>
+				</form>
+			</div>
+			<div class="ButtonContainer">
+				<button-type class="addWorksButton activation">Ajouter une photo</button>
+			</div>
+		</div>
+		
+	</div>
+			<!-- aside pour la barre noir admin -->
+	<aside class="hidden blackBarAdmin">
+		<i class="fa-regular fa-pen-to-square"></i>
+		<p>Mode édition</p>
+	</aside>
+<!--</header>-->
+
     <header>
       <h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
       <nav>
         <ul>
-          <li>projets</li>
-          <li>contact</li>
-          <li>login</li>
+          <li>
+            <a href="index.html#portfolio">projets</a>
+          </li>
+          <li>
+            <a href="./index.html#contact">contact</a>
+          </li>
+          <li>
+            <a class="loginLogout" href="./login.html">login</a>
+          </li>
           <li><img src="./assets/icons/instagram.png" alt="Instagram" /></li>
         </ul>
       </nav>
@@ -51,53 +107,21 @@
         </article>
       </section>
       <section id="portfolio">
-        <h2>Mes Projets</h2>
-        <div class="gallery">
-          <!--<figure>
-				<img src="assets/images/abajour-tahina.png" alt="Abajour Tahina">
-				<figcaption>Abajour Tahina</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-v.png" alt="Appartement Paris V">
-				<figcaption>Appartement Paris V</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/restaurant-sushisen-londres.png" alt="Restaurant Sushisen - Londres">
-				<figcaption>Restaurant Sushisen - Londres</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/la-balisiere.png" alt="Villa “La Balisiere” - Port Louis">
-				<figcaption>Villa “La Balisiere” - Port Louis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/structures-thermopolis.png" alt="Structures Thermopolis">
-				<figcaption>Structures Thermopolis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-x.png" alt="Appartement Paris X">
-				<figcaption>Appartement Paris X</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/le-coteau-cassis.png" alt="Pavillon “Le coteau” - Cassis">
-				<figcaption>Pavillon “Le coteau” - Cassis</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/villa-ferneze.png" alt="Villa Ferneze - Isola d’Elba">
-				<figcaption>Villa Ferneze - Isola d’Elba</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/appartement-paris-xviii.png" alt="Appartement Paris XVIII">
-				<figcaption>Appartement Paris XVIII</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/bar-lullaby-paris.png" alt="Bar “Lullaby” - Paris">
-				<figcaption>Bar “Lullaby” - Paris</figcaption>
-			</figure>
-			<figure>
-				<img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-				<figcaption>Hotel First Arte - New Delhi</figcaption>
-			</figure>-->
+        <div class="portfolioTitleLogged">
+				<h2>Mes Projets</h2>
+				<button-type class="modal-btn modal-trigger hidden">
+					<i class="fa-regular fa-pen-to-square"></i>
+					<p>Modifier</p>
+				</button>
+			</div>
+
+
+        <div class="filters"><!-- div/classe pour les catégories/filters -->
         </div>
+
+        <div class="gallery"><!-- Travaux affichés via l'API -->
+        </div>
+
       </section>
       <section id="contact">
         <h2>Contact</h2>
