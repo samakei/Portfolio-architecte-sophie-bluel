@@ -2,7 +2,7 @@
 const token = localStorage.getItem('token');
 
 //On récupère la liste des catégories
-const getCategories = async () => {
+const takeCategories = async () => {
   try {
     const response = await fetch('http://localhost:5678/api/categories');
     if (!response.ok) {
@@ -95,8 +95,10 @@ if (token) {
               (work) => work.id != trashButton.getAttribute('data-id')
             );
             displayThumbnails(updatedThumbnails); //Mise à jour des vignettes
-            displayWorks(updatedThumbnails);
+            takeWorks(updatedThumbnails);
+      
           }
+         
         });
       });
     }
@@ -149,7 +151,7 @@ if (token) {
     categories.innerHTML = '';
 
     //Catégories pour le menu déroulant
-    const allCategories = await getCategories();
+    const allCategories = await takeCategories();
     categories.appendChild(document.createElement('option'));
     for (const element of allCategories) {
       const categoriesOption = document.createElement('option');
@@ -300,7 +302,7 @@ if (token) {
       .then((data) => {
         works = data;
         displayThumbnails(works);
-        displayWorks(works);
+        takeWorks(works);
       })
       .catch((error) => {
         alert(`Erreur: ` + error);
@@ -317,5 +319,6 @@ if (token) {
     event.preventDefault();
     window.localStorage.removeItem('token');
     window.location = 'index.html';
+    return 'index.html'
   });
-}
+};

@@ -4,7 +4,8 @@ let works; // Stocke les données des travaux
 let categories; // Stocke les travaux categories//
 let filterWorks;  // Stocke les travaux filtrés
 
-// Déclaration de la fonction displayCategory
+
+// Déclaration de la fonction takeCategory
 const takeCategory = (categories) => {
   // Sélectionne l'élément HTML avec la classe 'filters'
   const sectionFilters = document.querySelector('.filters');
