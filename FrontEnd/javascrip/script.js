@@ -187,14 +187,12 @@ if (token) {
 
     //Si tous les champs rempli, alors bouton vert
     if (imageSrc !== undefined && title !== "" && categoryId !== "") {
-      btnValider.style.backgroundColor = "#1D6154";
-      btnValider.style.border = "solid 1px #1D6154";
+      btnValider.classList.add('btn-ajouter-valid')
       document.querySelector('.errorMessageCategory').classList.add('hidden');
       const errorCatMargin = document.querySelector('.form select');
       errorCatMargin.style.marginBottom = '63px';    
     } else {
-      btnValider.style.backgroundColor = "#A7A7A7";
-      btnValider.style.border = "solid 1px #A7A7A7";
+      btnValider.classList.remove('btn-ajouter-valid')
     }
   }
 

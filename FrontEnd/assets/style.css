@@ -185,3 +185,8 @@ footer nav ul {
 	justify-content: flex-end;
 	margin: 2em
 }
+
+.ButtonValidation .btn-ajouter-valid {
+	border: solid 1px #1D6154;
+	background-color: #1D6154;
+}
